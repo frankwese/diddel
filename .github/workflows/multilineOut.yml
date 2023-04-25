@@ -22,7 +22,10 @@ jobs:
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
-          echo \"sidecar.container[0].image=${{inputs.sidecarImage}}" >> "$GITHUB_OUTPUT"
+          if [ -n ${{inputs.sidecarImage}} ]
+            then
+              echo \"sidecar.container[0].image=${{inputs.sidecarImage}}\" >> "$GITHUB_OUTPUT"
+          fi
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
