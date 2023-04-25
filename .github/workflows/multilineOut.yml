@@ -32,7 +32,10 @@ jobs:
 #          echo ] >> "$GITHUB_OUTPUT"
 #          echo "EOT" >> "$GITHUB_OUTPUT"
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: outputs
         run: |
           echo ${{ steps.step_one.outputs.NASE }}
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
+      - name: Join directly
+        run: |
+          echo ${{ join(fromJSON('["1","2",' steps.step_one.outputs.NASE ']'), ';') }}
