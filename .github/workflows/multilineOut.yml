@@ -15,12 +15,12 @@ jobs:
         id: step_one
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_OUTPUT"
+          echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
-          echo "$EOF" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
           echo "NASE=hase" >> "$GITHUB_OUTPUT"
       
 #      - name: createSetParameter
