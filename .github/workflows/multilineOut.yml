@@ -25,6 +25,7 @@ jobs:
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
+          echo ${{ inputs.sidecarImage && '"sidecar.container[0].image='}}${{inputs.sidecarImage}}${{inputs.sidecarImage && '"'}}
 
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
@@ -43,7 +44,6 @@ jobs:
           
       - name: outputs
         run: |
-          echo ${{ inputs.sidecarImage && '"sidecar.container[0].image='}}${{inputs.sidecarImage}}${{inputs.sidecarImage && '"'}}
 
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
      
