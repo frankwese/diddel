@@ -16,8 +16,9 @@ jobs:
         run: |
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_OUTPUT"
-          echo huhu
+          hihi
           echo "$EOF" >> "$GITHUB_OUTPUT"
+          echo "NASE=hase" >> "$GITHUB_OUTPUT"
       
 #      - name: createSetParameter
 #        id: set
@@ -31,4 +32,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo ${{ steps.set.step_one.JSON_RESPONSE }}
+          echo ${{ steps.set.step_one.NASE }}
           echo test, and deploy your project.
