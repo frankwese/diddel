@@ -11,7 +11,10 @@ on:
 jobs:
   output:
     runs-on: ubuntu-latest
-
+#          if [ -n ${{inputs.sidecarImage}} ]
+#            then
+#              echo \"sidecar.container[0].image=${{inputs.sidecarImage}}\" >> "$GITHUB_OUTPUT"
+#          fi
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -22,10 +25,7 @@ jobs:
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
-          if [ -n ${{inputs.sidecarImage}} ]
-            then
-              echo \"sidecar.container[0].image=${{inputs.sidecarImage}}\" >> "$GITHUB_OUTPUT"
-          fi
+
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
@@ -43,5 +43,7 @@ jobs:
           
       - name: outputs
         run: |
+          echo ${{ (inputs.sidecarImage && true) || 'huhu' }}
+
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
      
