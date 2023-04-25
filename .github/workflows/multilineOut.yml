@@ -22,10 +22,7 @@ jobs:
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
-          if [ -n ${{ inputs.sidecarImage }} ]
-            then 
-              echo \"sidecar.container[0].image=${{inputs.sidecarImage}}" >> "$GITHUB_OUTPUT"
-          fi
+          echo \"sidecar.container[0].image=${{inputs.sidecarImage}}" >> "$GITHUB_OUTPUT"
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
@@ -39,9 +36,10 @@ jobs:
 #          echo \"image.repository=${{ steps.login-ecr.outputs.registry }}/${{env.CONTAINER_REPO}}\"
 #          echo ] >> "$GITHUB_OUTPUT"
 #          echo "EOT" >> "$GITHUB_OUTPUT"
-      # Runs a set of commands using the runners shell
+     
+          
       - name: outputs
         run: |
-          echo ${{ steps.step_one.outputs.NASE }}
+          echo ${{ ${{inputs.sidecarImage}} && true || 'huhu' }}
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
      
