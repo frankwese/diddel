@@ -43,6 +43,5 @@ jobs:
           
       - name: outputs
         run: |
-          echo ${{ (inputs.sidecarImage && true) || 'huhu' }}
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
      
