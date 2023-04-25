@@ -11,17 +11,24 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      - name: createSetParameter
-        id: set
-        run:
-          echo "OUT<<EOT" >> "$GITHUB_OUTPUT"
-          echo [ >> "$GITHUB_OUTPUT"
-          echo \"image.repository=${{ steps.login-ecr.outputs.registry }}/${{env.CONTAINER_REPO}}\"
-          echo ] >> "$GITHUB_OUTPUT"
-          echo "EOT" >> "$GITHUB_OUTPUT"
+      - name: Set the value in bash
+        id: step_one
+        run: |
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "JSON_RESPONSE<<$EOF" >> "$GITHUB_OUTPUT"
+          curl https://jsonplaceholder.typicode.com/todos/1 >> "$GITHUB_OUTPUT"
+          echo "$EOF" >> "$GITHUB_OUTPUT"
+      
+#      - name: createSetParameter
+#        id: set
+#        run:
+#          echo "OUT<<EOT" >> "$GITHUB_OUTPUT"
+#          echo [ >> "$GITHUB_OUTPUT"
+#          echo \"image.repository=${{ steps.login-ecr.outputs.registry }}/${{env.CONTAINER_REPO}}\"
+#          echo ] >> "$GITHUB_OUTPUT"
+#          echo "EOT" >> "$GITHUB_OUTPUT"
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo ${{ steps.set.outputs.OUT }}
+          echo ${{ steps.set.step_one.JSON_RESPONSE }}
           echo test, and deploy your project.
