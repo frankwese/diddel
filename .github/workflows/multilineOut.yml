@@ -3,6 +3,10 @@ name: Multiline Output
 # Controls when the workflow will run
 on:
   workflow_dispatch:
+    inputs:
+      sidecarImage:
+        type: string
+        required: false
 
 jobs:
   output:
@@ -18,6 +22,10 @@ jobs:
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
+          if [ -n ${{ inputs.sidecarImage }} ]
+            then 
+              echo \"sidecar.container[0].image=${{inputs.sidecarImage}}" >> "$GITHUB_OUTPUT"
+          fi
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
           echo "EOF" >> "$GITHUB_OUTPUT"
@@ -36,6 +44,4 @@ jobs:
         run: |
           echo ${{ steps.step_one.outputs.NASE }}
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
-      - name: Join directly
-        run: |
-          echo ${{ join(fromJSON('["1","2", ${{ steps.step_one.outputs.NASE }} ]'), '+++') }}
+     
