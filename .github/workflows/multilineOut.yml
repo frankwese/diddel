@@ -38,4 +38,4 @@ jobs:
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
       - name: Join directly
         run: |
-          echo ${{ join(fromJSON('["1","2", ${{steps.step_one.outputs.NASE}} ]'), ';') }}
+          echo ${{ join(fromJSON('["1","2", "steps.step_one.outputs.NASE" ]'), ';') }}
