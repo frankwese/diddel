@@ -11,10 +11,7 @@ on:
 jobs:
   output:
     runs-on: ubuntu-latest
-#          if [ -n ${{inputs.sidecarImage}} ]
-#            then
-#              echo \"sidecar.container[0].image=${{inputs.sidecarImage}}\" >> "$GITHUB_OUTPUT"
-#          fi
+
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -25,7 +22,9 @@ jobs:
           echo "JSON_RESPONSE<<EOF" >> "$GITHUB_OUTPUT"
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
-          echo ${{ inputs.sidecarImage && '\"sidecar.container[0].image='}}${{inputs.sidecarImage}}${{inputs.sidecarImage && '\",'}} >> "$GITHUB_OUTPUT"
+          echo ${{ inputs.sidecarImage && '\"sidecar.container[0].image='}}
+                ${{inputs.sidecarImage}}
+                ${{inputs.sidecarImage && '\",'}} >> "$GITHUB_OUTPUT"
 
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
