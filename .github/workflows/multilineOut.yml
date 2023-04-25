@@ -23,8 +23,8 @@ jobs:
           echo [ >> "$GITHUB_OUTPUT"
           echo \"hase=nase\", >> "$GITHUB_OUTPUT"
           echo ${{ inputs.sidecarImage && '\"sidecar.container[0].image='}}\
-                ${{inputs.sidecarImage}}\
-                ${{inputs.sidecarImage && '\",'}} >> "$GITHUB_OUTPUT"
+          ${{inputs.sidecarImage}}\
+          ${{inputs.sidecarImage && '\",'}} >> "$GITHUB_OUTPUT"
 
           echo \"dings=bums\" >> "$GITHUB_OUTPUT"
           echo ] >> "$GITHUB_OUTPUT"
