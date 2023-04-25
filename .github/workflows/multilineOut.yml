@@ -43,7 +43,7 @@ jobs:
           
       - name: outputs
         run: |
-          echo ${{ inputs.sidecarImage && '"sidecar.container[0].image="' || 'huhu' }}${{inputs.sidecarImage}}
+          echo ${{ inputs.sidecarImage && '"sidecar.container[0].image='}}${{inputs.sidecarImage}}${{inputs.sidecarImage && '"'}}
 
           echo ${{ join(fromJSON(steps.step_one.outputs.JSON_RESPONSE), ':') }}
      
